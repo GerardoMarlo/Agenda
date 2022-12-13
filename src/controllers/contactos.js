@@ -54,6 +54,7 @@ module.exports ={
         },
         edit: (req, res) =>{
             //ie http://localhost:4000/contactos/editar/Luis/status?to=1
+            //ie http://localhost:4000/contactos/editar/Luis/correo?to=luis@gmail.com
             const where = req.params.user;
             const what = req.params.param;
             let to = (req.query.to);
