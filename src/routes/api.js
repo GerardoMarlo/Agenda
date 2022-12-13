@@ -9,9 +9,6 @@ router.get("/contactos/filtrar/", contactosController.filter);
 router.get("/contactos/eliminar/", contactosController.delete);
 router.get("/contactos/editar/:user/:param", contactosController.edit);
 router.get("/contactos/:id", contactosController.filterID);
-
-
-
 router.post("/contactos", express.json(), contactosController.create);
 
 //USUARIOS

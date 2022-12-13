@@ -7,7 +7,9 @@ const app = express();
 const apiRoutes = require("./src/routes/api");
 app.use(apiRoutes);
 app.use(express.json());
+
 const port = process.env.PORT;
+
 app.get("", (req, res) => {
     res.send("api works");
 })
