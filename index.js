@@ -1,17 +1,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
 
 const apiRoutes = require("./src/routes/api");
 app.use(apiRoutes);
-
-const port = 4000;
+app.use(express.json());
+const port = process.env.PORT;
 app.get("", (req, res) => {
     res.send("api works");
 })
 
-const uri = "mongodb+srv://prueba:contraseña@clusteragenda.ybfrvcx.mongodb.net/Agenda?retryWrites=true&w=majority";
+const uri = process.env.MONGODB;
+console.log(uri)
 
 mongoose.connect(uri, (err)=>{
 if(err){

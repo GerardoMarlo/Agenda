@@ -40,6 +40,7 @@ module.exports ={
         });
     },
     delete: (req, res) =>{
+        //ie http://localhost:4000/contactos/eliminar?delete=Luis
         const where = req.query.delete;
         console.log("entra where")
         console.log(where)
@@ -53,22 +54,37 @@ module.exports ={
         },
         edit: (req, res) =>{
             //ie http://localhost:4000/contactos/editar?edit=Luis&what=status&to=1
-            const where = req.query.edit;
-            const what = req.query.what;
-            const to = parseInt(req.query.to);
+            const where = req.params.user;
+            const what = req.params.param;
+            let to = (req.query.to);
             console.log("entra edit")
             console.log(where)
             console.log(what)
             console.log(to)
-            model.updateOne({nombre:where},{status:to})  
+            if(what == "status"){
+                to = parseInt(to);
+            model.findOneAndUpdate({nombre:where},{status:to})
+             
             .then(data => {
                 
                 res.send("Se ha cambiado a "+ where + " "+what+" : "+to);
-                console.log(model.where)
+                
             })
             .catch(err =>{
                 res.status(400).send("algo salio mal");
             });
             }
+            else if(what == "correo"){
+                model.findOneAndUpdate({nombre:where},{correo:to})
+                 
+                .then(data => {
+                    
+                    res.send("Se ha cambiado a "+ where + " "+what+" : "+to);
+                    
+                })
+                .catch(err =>{
+                    res.status(400).send("algo salio mal");
+                });
+                }}
     
 }

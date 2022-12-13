@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+// Status 1: Activo
+//Status 2: Bloqueado/eliminado
 
 const contactoSchema = new mongoose.Schema({
     nombre: {type: String},
