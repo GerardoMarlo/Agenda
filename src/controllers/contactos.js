@@ -9,7 +9,7 @@ module.exports ={
             res.send(data); 
         })
         .catch(err =>{
-            res.status(400).send("algo salio malo");
+            res.status(400).send("algo salio mal");
         });
     },
     getAll: (req, res) => {
@@ -18,7 +18,7 @@ module.exports ={
             res.send(data);
         })
         .catch(err =>{
-            res.status(400).send("algo salio malo");
+            res.status(400).send("algo salio mal");
         });
     },
     create: (req, res) =>{
@@ -53,7 +53,7 @@ module.exports ={
         });
         },
         edit: (req, res) =>{
-            //ie http://localhost:4000/contactos/editar?edit=Luis&what=status&to=1
+            //ie http://localhost:4000/contactos/editar/Luis/status?to=1
             const where = req.params.user;
             const what = req.params.param;
             let to = (req.query.to);
