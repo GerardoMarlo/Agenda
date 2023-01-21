@@ -1,10 +1,11 @@
 const model = require("./../models/contacto");
-
+const jwt = require("jsonwebtoken");
 module.exports ={
     filter: (req, res) =>{
+        //http://localhost:4000/contactos/filtrar?filtro=Nuevo
         const filter = req.query.filtro;
         
-        model.find().or([{status:1, nombre:filter}, {status:1, correo:filter}])
+        model.find().or([{status:1, nombre:filter, idUsuarioDueño: req.userIdDueño}, {status:1, correo:filter, idUsuarioDueño: req.userIdDueño}])
         .then(data => {
             res.send(data); 
         })
@@ -13,21 +14,26 @@ module.exports ={
         });
     },
     getAll: (req, res) => {
-        model.find({status:1})
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err =>{
-            res.status(400).send("algo salio mal");
-        });
-    },
-    create: (req, res) =>{
-        const data = req.body;
         
-        model.create(data).then(response => {
+            model.find({status:1, idUsuarioDueño: req.userIdDueño})
+            .then(data => {
+                res.send(data);
+            })
+            .catch(err =>{
+                res.status(400).send("algo salio mal");
+            });
+            
+            
+        },
+    create: (req, res) =>{
+
+            let data = req.body;
+            data.idUsuarioDueño = req.userIdDueño
+            model.create(data).then(response => {
             res.send(response);
-        });
-    },
+        }).catch(err =>{
+            res.status(400).send("algo salio mal, ya tienes registrado a este contacto");
+    })},
 
     filterID: (req, res) =>{
         const id = req.params.id;

@@ -2,13 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const apiRoutes = require("./src/routes/api");
 const app = express();
 
-const apiRoutes = require("./src/routes/api");
-app.use(apiRoutes);
-app.use(express.json());
 
-const port = process.env.PORT;
+app.use(express.json());
+app.use(apiRoutes);
+
+const port = process.env.PORT || 3000;
 
 app.get("", (req, res) => {
     res.send("api works");
