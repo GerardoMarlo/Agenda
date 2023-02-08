@@ -6,7 +6,7 @@ const authMiddleware = (req, res, next) =>{
             res.sendStatus(401);
             return;
         }
-        console.log("Pasamos por middleware");
+        console.log("Pasamos por middleware auth token");
         req.userIdDueño = decoded._id;
         console.log(req.userIdDueño);
         next();

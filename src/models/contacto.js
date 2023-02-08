@@ -8,7 +8,9 @@ const contactoSchema = new mongoose.Schema({
     telefono: {type: String},
     correo: {type: String},
     status: {type: Number, default: 1},
-    idUsuarioDueño: {type: String}
+    idUsuarioDueño: {type: String},
+    photoURL: {type: String}
+
 });
 
 module.exports = mongoose.model("contactos", contactoSchema);

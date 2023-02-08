@@ -29,8 +29,13 @@ module.exports ={
 
             let data = req.body;
             data.idUsuarioDueño = req.userIdDueño
+            console.log(req.file)
+
+            data.photoURL = req.file.filename
+            
             model.create(data).then(response => {
             res.send(response);
+            console.log(response)
         }).catch(err =>{
             res.status(400).send("algo salio mal, ya tienes registrado a este contacto");
     })},
